@@ -1,0 +1,749 @@
+{
+  "label": "final_tokenmanager_1008",
+  "target": "0x0000000000000000000000000000000000001008",
+  "assertions": [
+    {
+      "name": "geth_mining_started",
+      "pass": true,
+      "detail": "head=5"
+    },
+    {
+      "name": "genesis_hashes_match_A",
+      "pass": true,
+      "detail": "geth=0x9c2a5110fdd52e32.. reth=0x9c2a5110fdd52e32.."
+    },
+    {
+      "name": "genesis_hashes_match_B",
+      "pass": true,
+      "detail": "geth=0x9c2a5110fdd52e32.. reth=0x9c2a5110fdd52e32.."
+    },
+    {
+      "name": "reth_a_syncing",
+      "pass": true,
+      "detail": "geth=9 reth=9"
+    },
+    {
+      "name": "reth_b_syncing",
+      "pass": true,
+      "detail": "geth=9 reth=9"
+    },
+    {
+      "name": "geth_mined_paid_gas_control",
+      "pass": true,
+      "detail": "block=11 status=1"
+    },
+    {
+      "name": "reth_a_accepted_paid_gas_control_block",
+      "pass": true,
+      "detail": "reth_a head=12 >= 11"
+    },
+    {
+      "name": "reth_b_accepted_paid_gas_control_block",
+      "pass": true,
+      "detail": "reth_b head=12 >= 11"
+    },
+    {
+      "name": "trigger_normal_receipt",
+      "pass": true,
+      "detail": "block=14 status=0x1 gasUsed=21000 gasPrice=0x0 to=0x0000000000000000000000000000000000001008 from=0xa1bc7d0db44ad8f083ae3ecddfa21a110b3ca222"
+    },
+    {
+      "name": "followers_still_pinned_after_grace",
+      "pass": true,
+      "detail": "reth_a=13 reth_b=13 < 14"
+    },
+    {
+      "name": "all_nodes_alive_at_end_of_window",
+      "pass": true,
+      "detail": "geth=True reth_a=True reth_b=True"
+    },
+    {
+      "name": "geth_mined_required_blocks_past_trigger",
+      "pass": true,
+      "detail": "head=119 >= trigger(14)+100 (target 114)"
+    },
+    {
+      "name": "geth_head_below_devnet_epoch_wall",
+      "pass": true,
+      "detail": "head=119 <= 190+5"
+    },
+    {
+      "name": "observation_window_met",
+      "pass": true,
+      "detail": "302.2s >= 300s"
+    },
+    {
+      "name": "reth_a_never_reached_trigger_block",
+      "pass": true,
+      "detail": "max head=13 < trigger block 14 (60 samples over 302.2s)"
+    },
+    {
+      "name": "reth_b_never_reached_trigger_block",
+      "pass": true,
+      "detail": "max head=13 < trigger block 14 (pre+post restart)"
+    },
+    {
+      "name": "reth_a_unexpected_system_tx_logged",
+      "pass": true,
+      "detail": "count=4"
+    },
+    {
+      "name": "reth_b_unexpected_system_tx_logged",
+      "pass": true,
+      "detail": "count(pre-restart)=4"
+    },
+    {
+      "name": "reth_a_descendant_rejections_logged",
+      "pass": true,
+      "detail": "rejection lines=109"
+    },
+    {
+      "name": "reth_b_descendant_rejections_logged",
+      "pass": true,
+      "detail": "rejection lines(pre-restart)=71"
+    },
+    {
+      "name": "reth_b_restarted",
+      "pass": true,
+      "detail": "{'at_t': 30.0, 'stop_seconds': 1.0, 'rpc_back_s': 2.0}"
+    },
+    {
+      "name": "reth_b_post_restart_still_pinned",
+      "pass": true,
+      "detail": "max head post-restart=13 < trigger block 14"
+    },
+    {
+      "name": "reth_b_fresh_log_shows_rejection_after_restart",
+      "pass": true,
+      "detail": "fresh-log rejection lines=39"
+    },
+    {
+      "name": "both_followers_pinned_at_pretrigger_block",
+      "pass": true,
+      "detail": "reth_a=13 reth_b=13 expected=13"
+    },
+    {
+      "name": "reth_a_rejections_continuously_accumulating",
+      "pass": true,
+      "detail": "series=[71, 109, 109, 109, 109, 109, 109, 109, 109] heads=[81, 119, 119, 119, 119, 119, 119, 119, 119] (active_increase=True)"
+    }
+  ],
+  "genesis_timestamp": 1792621721,
+  "genesis_hash": "0x9c2a5110fdd52e32196b4e17f8f3224339b571992357be9045a944298f0cff05",
+  "block1_txs": 7,
+  "enode": "enode://04e4548eec8336a8e6a965d80be10daf602496d8f2e4ffcde46b9f95be4dca717a8370f9fd2d898c139bd6ae2b1fc221affe4abbc61a9146ae751a8b97ecc51f@127.0.0.1:30303",
+  "reth_a_genesis_hash": "0x9c2a5110fdd52e32196b4e17f8f3224339b571992357be9045a944298f0cff05",
+  "reth_b_genesis_hash": "0x9c2a5110fdd52e32196b4e17f8f3224339b571992357be9045a944298f0cff05",
+  "control_tx": "0xafa294bf5a72a8e1eed1a57bf0dd45301c07428b0ff20391887e3a7793f46b2e",
+  "control_block": 11,
+  "trigger_tx": "0x3685b1d8d2e90c482a2b64d66e5b9dc75e5049cd3bc5cf639e422056da98bc14",
+  "trigger_block": 14,
+  "trigger_gas_used": 21000,
+  "trigger_mined_after_s": 1.0,
+  "trigger_tx_fields": {
+    "from": "0xa1bc7d0db44ad8f083ae3ecddfa21a110b3ca222",
+    "to": "0x0000000000000000000000000000000000001008",
+    "gasPrice": "0x0",
+    "gas": "0x5208",
+    "type": "0x0"
+  },
+  "mining_target_head": 114,
+  "epoch_wall_cap_applied": false,
+  "reth_b_restart": {
+    "at_t": 30.0,
+    "stop_seconds": 1.0,
+    "rpc_back_s": 2.0
+  },
+  "mining_stopped_at_head": 118,
+  "mining_stopped_at_t": 47.0,
+  "observation_samples": [
+    {
+      "t": 0.0,
+      "geth": 14,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 5.0,
+      "geth": 25,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 10.0,
+      "geth": 36,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 15.0,
+      "geth": 47,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 20.0,
+      "geth": 58,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 25.0,
+      "geth": 70,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 30.0,
+      "geth": 81,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 37.0,
+      "geth": 96,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 42.0,
+      "geth": 107,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 47.0,
+      "geth": 118,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 52.0,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 57.0,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 62.0,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 67.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 72.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 77.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 82.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 87.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 92.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 97.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 102.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 107.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 112.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 117.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 122.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 127.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 132.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 137.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 142.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 147.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 152.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 157.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 162.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 167.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 172.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 177.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 182.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 187.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 192.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 197.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 202.1,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 207.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 212.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 217.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 222.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 227.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 232.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 237.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 242.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 247.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 252.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 257.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 262.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 267.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 272.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 277.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 282.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 287.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 292.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    },
+    {
+      "t": 297.2,
+      "geth": 119,
+      "reth_a": 13,
+      "reth_b": 13
+    }
+  ],
+  "rejection_checkpoints": [
+    {
+      "t": 30.0,
+      "geth_head": 81,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 68,
+        "links_to_rejected": 67,
+        "any": 71
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 68,
+        "links_to_rejected": 67,
+        "any": 71
+      },
+      "reth_b_restarted": false,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 62.0,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 92.1,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 122.1,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 152.1,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 182.1,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 212.2,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 242.2,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    },
+    {
+      "t": 272.2,
+      "geth_head": 119,
+      "reth_a_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 106,
+        "links_to_rejected": 105,
+        "any": 109
+      },
+      "reth_b_counts": {
+        "unexpected_system_tx": 4,
+        "returned_invalid": 36,
+        "links_to_rejected": 35,
+        "any": 39
+      },
+      "reth_b_restarted": true,
+      "reth_a_alive": true,
+      "reth_b_alive": true
+    }
+  ],
+  "observation_actual_seconds": 302.2,
+  "post_window_heads": {
+    "geth": 119,
+    "reth_a": 13,
+    "reth_b": 13
+  },
+  "geth_final_head": 119,
+  "reth_a_max_head": 13,
+  "reth_b_max_head": 13,
+  "reth_b_max_head_post_restart": 13,
+  "blocks_past_trigger": 105,
+  "reth_a_final_head": 13,
+  "reth_b_final_head": 13,
+  "reth_a_rejections": {
+    "unexpected_system_tx": 4,
+    "returned_invalid": 106,
+    "links_to_rejected": 105,
+    "any": 109
+  },
+  "reth_b_rejections_pre_restart": {
+    "unexpected_system_tx": 4,
+    "returned_invalid": 68,
+    "links_to_rejected": 67,
+    "any": 71
+  },
+  "reth_b_rejections_post_restart": {
+    "unexpected_system_tx": 4,
+    "returned_invalid": 36,
+    "links_to_rejected": 35,
+    "any": 39
+  },
+  "reth_a_count_series": [
+    71,
+    109,
+    109,
+    109,
+    109,
+    109,
+    109,
+    109,
+    109
+  ],
+  "checkpoint_geth_heads": [
+    81,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119,
+    119
+  ],
+  "geth_imported_segments": 0,
+  "verdict": "PASS"
+}

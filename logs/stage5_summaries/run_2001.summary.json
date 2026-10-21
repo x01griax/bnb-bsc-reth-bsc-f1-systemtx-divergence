@@ -1,0 +1,144 @@
+{
+  "label": "staking_2001",
+  "target": "0x0000000000000000000000000000000000002001",
+  "assertions": [
+    {
+      "name": "geth_mining_started",
+      "pass": true,
+      "detail": "head=4"
+    },
+    {
+      "name": "genesis_hashes_match",
+      "pass": true,
+      "detail": "geth=0xfa5ee658f67bbfd3.. reth=0xfa5ee658f67bbfd3.."
+    },
+    {
+      "name": "reth_syncing",
+      "pass": true,
+      "detail": "geth=9 reth=9"
+    },
+    {
+      "name": "geth_mined_paid_gas_control",
+      "pass": true,
+      "detail": "block=10 status=1"
+    },
+    {
+      "name": "reth_accepted_paid_gas_control_block",
+      "pass": true,
+      "detail": "reth head=11 >= 10"
+    },
+    {
+      "name": "trigger_normal_receipt",
+      "pass": true,
+      "detail": "block=13 status=0x1 gasUsed=21000 gasPrice=0x0 to=0x0000000000000000000000000000000000002001 from=0xa1bc7d0db44ad8f083ae3ecddfa21a110b3ca222"
+    },
+    {
+      "name": "geth_continued_past_trigger",
+      "pass": true,
+      "detail": "geth head=22 >= 13+8"
+    },
+    {
+      "name": "reth_never_reached_trigger_block",
+      "pass": true,
+      "detail": "reth max head=12 < trigger block 13"
+    },
+    {
+      "name": "reth_log_shows_unexpected_system_tx",
+      "pass": true,
+      "detail": "count=4"
+    }
+  ],
+  "genesis_timestamp": 1792613393,
+  "genesis_hash": "0xfa5ee658f67bbfd3d24573b5932e047895347e63966161c1e585403ecdf37655",
+  "block1_txs": 7,
+  "enode": "enode://82609a5ce6c9354bbad6a55322a04cae7ef25c816201610cc6cfece5f1624e2a446729fb8ba6e71f1fae833dbe2495cfc14071f0d8ecd15f5fc4f3e44a0dfaf0@127.0.0.1:30303",
+  "reth_genesis_hash": "0xfa5ee658f67bbfd3d24573b5932e047895347e63966161c1e585403ecdf37655",
+  "control_tx": "0x2a550853ab3ff90d6192ae374aca70a986340a74e742cb7a8414a5d82a56892f",
+  "control_block": 10,
+  "trigger_tx": "0x0490e5eb090fd3919258ef44cdfe6da341ab3ab11ead38e5508def9d3fb8f154",
+  "trigger_block": 13,
+  "trigger_gas_used": 21000,
+  "trigger_tx_fields": {
+    "from": "0xa1bc7d0db44ad8f083ae3ecddfa21a110b3ca222",
+    "to": "0x0000000000000000000000000000000000002001",
+    "gasPrice": "0x0",
+    "gas": "0x5208",
+    "type": "0x0"
+  },
+  "geth_head_after_trigger": 22,
+  "observation_samples": [
+    {
+      "t": 0.0,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 2.5,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 5.0,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 7.5,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 10.0,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 12.5,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 15.0,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 17.5,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 20.0,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 22.5,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 25.0,
+      "geth": 22,
+      "reth": 12
+    },
+    {
+      "t": 27.5,
+      "geth": 22,
+      "reth": 12
+    }
+  ],
+  "reth_max_head": 12,
+  "reth_unexpected_system_tx_count": 4,
+  "reth_invalid_payload_lines": 10,
+  "reth_fork_recovery_lines": 2,
+  "reth_rejection_sample": [
+    "\u001b[2m2026-10-21T20:15:06.753182Z\u001b[0m \u001b[34mDEBUG\u001b[0m \u001b[1mon_new_payload\u001b[0m\u001b[1m{\u001b[0m\u001b[3mblock_hash\u001b[0m\u001b[2m=\u001b[0m0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 \u001b[3mblock_num\u001b[0m\u001b[2m=\u001b[0m13\u001b[1m}\u001b[0m\u001b[2m:\u001b[0m\u001b[1mtry_insert_payload\u001b[0m\u001b[2m:\u001b[0m\u001b[1minsert_block_or_payload\u001b[0m\u001b[1m{\u001b[0m\u001b[3mblock_id\u001b[0m\u001b[2m=\u001b[0mBlockWithParent { parent: 0x3b4149063647a49b47db18333d487c7971cb1fd0db195f5f637a222c25897144, block: NumHash { number: 13, hash: 0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 } }\u001b[1m}\u001b[0m\u001b[2m:\u001b[0m\u001b[1mvalidate_block_with_state\u001b[0m\u001b[1m{\u001b[0m\u001b[3mparent\u001b[0m\u001b[2m=\u001b[0m0x3b4149063647a49b47db18333d487c7971cb1fd0db195f5f637a222c25897144 \u001b[3mtype_name\u001b[0m\u001b[2m=\u001b[0m\"payload\"\u001b[1m}\u001b[0m\u001b[2m:\u001b[0m \u001b[2mengine::tree::payload_validator\u001b[0m\u001b[2m:\u001b[0m Block execution failed, checking for header validation errors \u001b[3mexecution_err\u001b[0m\u001b[2m=\u001b[0mExecution(Validation(DepositRequestDecode(\"BSC validation error: unexpected system tx\"))) \u001b[3mblock\u001b[0m\u001b[2m=\u001b[0mNumHash { number: 13, hash: 0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 }",
+    "\u001b[2m2026-10-21T20:15:06.753260Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[1mon_new_payload\u001b[0m\u001b[1m{\u001b[0m\u001b[3mblock_hash\u001b[0m\u001b[2m=\u001b[0m0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 \u001b[3mblock_num\u001b[0m\u001b[2m=\u001b[0m13\u001b[1m}\u001b[0m\u001b[2m:\u001b[0m\u001b[1mtry_insert_payload\u001b[0m\u001b[2m:\u001b[0m\u001b[1minsert_block_or_payload\u001b[0m\u001b[1m{\u001b[0m\u001b[3mblock_id\u001b[0m\u001b[2m=\u001b[0mBlockWithParent { parent: 0x3b4149063647a49b47db18333d487c7971cb1fd0db195f5f637a222c25897144, block: NumHash { number: 13, hash: 0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 } }\u001b[1m}\u001b[0m\u001b[2m:\u001b[0m \u001b[2mbsc::bad_block\u001b[0m\u001b[2m:\u001b[0m Invalid block on live sync \u001b[3minvalid_hash\u001b[0m\u001b[2m=\u001b[0m0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 \u001b[3minvalid_number\u001b[0m\u001b[2m=\u001b[0m13 \u001b[3mminer\u001b[0m\u001b[2m=\u001b[0m0xa1bC7D0dB44Ad8f083AE3eCDdfA21A110B3Ca222 \u001b[3mrequests_hash\u001b[0m\u001b[2m=\u001b[0mSome(0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855) \u001b[3mis_bid_block\u001b[0m\u001b[2m=\u001b[0mfalse \u001b[3mbuilder\u001b[0m\u001b[2m=\u001b[0mNone \u001b[3mvalidation_err\u001b[0m\u001b[2m=\u001b[0mFailed to insert block (hash=0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91, number=13, parent_hash=0x3b4149063647a49b47db18333d487c7971cb1fd0db195f5f637a222c25897144): failed to decode deposit requests from receipts: BSC validation error: unexpected system tx",
+    "\u001b[2m2026-10-21T20:15:06.753294Z\u001b[0m \u001b[33m WARN\u001b[0m \u001b[1mon_new_payload\u001b[0m\u001b[1m{\u001b[0m\u001b[3mblock_hash\u001b[0m\u001b[2m=\u001b[0m0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 \u001b[3mblock_num\u001b[0m\u001b[2m=\u001b[0m13\u001b[1m}\u001b[0m\u001b[2m:\u001b[0m\u001b[1mtry_insert_payload\u001b[0m\u001b[2m:\u001b[0m \u001b[2mengine::tree\u001b[0m\u001b[2m:\u001b[0m Invalid block error on new payload \u001b[3minvalid_hash\u001b[0m\u001b[2m=\u001b[0m0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 \u001b[3minvalid_number\u001b[0m\u001b[2m=\u001b[0m13 \u001b[3mvalidation_err\u001b[0m\u001b[2m=\u001b[0mfailed to decode deposit requests from receipts: BSC validation error: unexpected system tx",
+    "\u001b[2m2026-10-21T20:15:06.753541Z\u001b[0m \u001b[34mDEBUG\u001b[0m \u001b[2mbsc::block_import\u001b[0m\u001b[2m:\u001b[0m New payload returned Invalid - not penalizing peer \u001b[3mblock_hash\u001b[0m\u001b[2m=\u001b[0m0x80d297fb70bfed94b885d2567141f9df672dc2cb26bf4482b54ae392a0163b91 \u001b[3mblock_number\u001b[0m\u001b[2m=\u001b[0m13 \u001b[3mvalidation_error\u001b[0m\u001b[2m=\u001b[0mfailed to decode deposit requests from receipts: BSC validation error: unexpected system tx \u001b[3mpeer\u001b[0m\u001b[2m=\u001b[0m0x82609a5ce6c9354bbad6a55322a04cae7ef25c816201610cc6cfece5f1624e2a446729fb8ba6e71f1fae833dbe2495cfc14071f0d8ecd15f5fc4f3e44a0dfaf0"
+  ],
+  "geth_imported_segments": 0,
+  "geth_trigger_included": true,
+  "verdict": "PASS"
+}

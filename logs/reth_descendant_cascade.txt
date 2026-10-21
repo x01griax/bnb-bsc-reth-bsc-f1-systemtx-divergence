@@ -1,0 +1,32 @@
+# reth-bsc - DESCENDANT-REJECTION CASCADE, final validation run
+# After the trigger block is cached invalid, EVERY subsequent block geth
+# announces is rejected without re-execution ('links to previously rejected
+# block'). geth mined 105 blocks past the trigger; the followers logged a
+# rejection line for essentially each announcement and stayed pinned at
+# block 13 for the full 5-minute window.
+
+## follower A - first 8 descendant rejections:
+[2m2026-10-21T22:33:58.054383Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0x7aada8e1bc186fd482837bfd927a6b6e3d8d82684b34afee060052daf2bc6dbb [3mhead_num[0m[2m=[0m15 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:33:58.502919Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0x2e85f5474f9c02ffc95f3d0e44caff19b253bad75d47bddafebcf27db88584ed [3mhead_num[0m[2m=[0m16 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:33:58.952965Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0x0cd9cb1419b34cfd9f8a0274cea872fbedc752fede44efa63395a2b42ddea358 [3mhead_num[0m[2m=[0m17 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:33:59.403886Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0x98ca00e31abd6d63b3a4d6b80a0fd82ecd6b58c95009d17d108f9c718938dc22 [3mhead_num[0m[2m=[0m18 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:33:59.858310Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0x0ea03f43bd290b6720ec14337f7134bf3c31bba4d75d5271a6f2134dc47df6e0 [3mhead_num[0m[2m=[0m19 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:34:00.302908Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0xa0ffc3f65a437cf9e96e09afbc6dead883e568c75b2ffb5f2a32fb3b335776b0 [3mhead_num[0m[2m=[0m20 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:34:00.753127Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0xcf1f59db4dad3a1591f41d7a7df66071bb4ea4feab33aa6bd240d8c6bcea1802 [3mhead_num[0m[2m=[0m21 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"announced head"
+[2m2026-10-21T22:34:01.205417Z[0m [33m WARN[0m [2mbsc::block_import[0m[2m:[0m Fork recovery failed [3mhead_hash[0m[2m=[0m0xb07e4df77b2e4b51b4c94a42be84e8ba085a97b9aa1d2b52032c18d666008ddd [3mhead_num[0m[2m=[0m22 [3merror[0m[2m=[0mengine new_payload returned Invalid for block 14: links to previously rejected block [3msource[0m[2m=[0m"Syncing path"
+
+## follower A total descendant-rejection lines: 105
+
+## follower B (pre-restart) - first 5:
+[2m2026-10-21T22:33:58.051421Z[0m [34mDEBUG[0m [2mbsc::block_import[0m[2m:[0m New payload returned Invalid - not penalizing peer [3mblock_hash[0m[2m=[0m0x7aada8e1bc186fd482837bfd927a6b6e3d8d82684b34afee060052daf2bc6dbb [3mblock_number[0m[2m=[0m15 [3mvalidation_error[0m[2m=[0mlinks to previously rejected block [3mpeer[0m[2m=[0m0x04e4548eec8336a8e6a965d80be10daf602496d8f2e4ffcde46b9f95be4dca717a8370f9fd2d898c139bd6ae2b1fc221affe4abbc61a9146ae751a8b97ecc51f
+[2m2026-10-21T22:33:58.502127Z[0m [34mDEBUG[0m [2mbsc::block_import[0m[2m:[0m New payload returned Invalid - not penalizing peer [3mblock_hash[0m[2m=[0m0x2e85f5474f9c02ffc95f3d0e44caff19b253bad75d47bddafebcf27db88584ed [3mblock_number[0m[2m=[0m16 [3mvalidation_error[0m[2m=[0mlinks to previously rejected block [3mpeer[0m[2m=[0m0x04e4548eec8336a8e6a965d80be10daf602496d8f2e4ffcde46b9f95be4dca717a8370f9fd2d898c139bd6ae2b1fc221affe4abbc61a9146ae751a8b97ecc51f
+[2m2026-10-21T22:33:58.952192Z[0m [34mDEBUG[0m [2mbsc::block_import[0m[2m:[0m New payload returned Invalid - not penalizing peer [3mblock_hash[0m[2m=[0m0x0cd9cb1419b34cfd9f8a0274cea872fbedc752fede44efa63395a2b42ddea358 [3mblock_number[0m[2m=[0m17 [3mvalidation_error[0m[2m=[0mlinks to previously rejected block [3mpeer[0m[2m=[0m0x04e4548eec8336a8e6a965d80be10daf602496d8f2e4ffcde46b9f95be4dca717a8370f9fd2d898c139bd6ae2b1fc221affe4abbc61a9146ae751a8b97ecc51f
+[2m2026-10-21T22:33:59.402015Z[0m [34mDEBUG[0m [2mbsc::block_import[0m[2m:[0m New payload returned Invalid - not penalizing peer [3mblock_hash[0m[2m=[0m0x98ca00e31abd6d63b3a4d6b80a0fd82ecd6b58c95009d17d108f9c718938dc22 [3mblock_number[0m[2m=[0m18 [3mvalidation_error[0m[2m=[0mlinks to previously rejected block [3mpeer[0m[2m=[0m0x04e4548eec8336a8e6a965d80be10daf602496d8f2e4ffcde46b9f95be4dca717a8370f9fd2d898c139bd6ae2b1fc221affe4abbc61a9146ae751a8b97ecc51f
+[2m2026-10-21T22:33:59.852030Z[0m [34mDEBUG[0m [2mbsc::block_import[0m[2m:[0m New payload returned Invalid - not penalizing peer [3mblock_hash[0m[2m=[0m0x0ea03f43bd290b6720ec14337f7134bf3c31bba4d75d5271a6f2134dc47df6e0 [3mblock_number[0m[2m=[0m19 [3mvalidation_error[0m[2m=[0mlinks to previously rejected block [3mpeer[0m[2m=[0m0x04e4548eec8336a8e6a965d80be10daf602496d8f2e4ffcde46b9f95be4dca717a8370f9fd2d898c139bd6ae2b1fc221affe4abbc61a9146ae751a8b97ecc51f
+
+## follower B (pre-restart) total: 67
+
+## census from summary.json (rejection lines at 30 s checkpoints):
+t=30s  geth=81  rej_A=71  rej_B=71
+t=62s  geth=119 rej_A=109 rej_B=39 (B restarted at t=30; fresh log)
+t=92s..t=272s (chain frozen): counts stable at 109/39; heads stable at 13/13

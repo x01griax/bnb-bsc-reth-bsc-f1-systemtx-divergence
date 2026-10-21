@@ -1,0 +1,19 @@
+# geth (bsc v1.8.1 @ 947ba1c) - ACCEPTANCE evidence, final validation run (0x1008)
+# Verbatim lines from geth.log (GitHub Actions run 39685404849).
+# Context: control (paid-gas) tx mined in block 11; TRIGGER tx 0x3685b1d8...a98bc14
+# (coinbase-signed, gasPrice 0x0, to TokenManager 0x1008) mined in block 14;
+# geth continued to head 119 (105 blocks past the trigger).
+
+## sealing of the trigger block (note txs=1 - the zero-gas trigger was included by the stock miner):
+INFO [10-21|22:33:57.586] Commit new sealing work                  number=14 sealhash=c8fdf8..480a4a txs=1 blobs=0 gas=21000 paymentLaneQuota=0 paymentLaneIdle=0 generalLaneYielded=0 fees=0       elapsed=434.124ms
+
+## trigger block written:
+INFO [10-21|22:33:57.601] Successfully seal and write new block    number=14 hash=8c89e0..7ab990 time=1,792,622,037,600 sealhash=c8fdf8..480a4a "block size"=810  elapsed=14.993ms
+
+## chain continues past the trigger (next 3 blocks):
+INFO [10-21|22:33:58.050] Successfully seal and write new block    number=15 hash=7aada8..bc6dbb time=1,792,622,038,050 sealhash=cc3fd1..395e80 "block size"=710  elapsed=14.884ms
+INFO [10-21|22:33:58.501] Successfully seal and write new block    number=16 hash=2e85f5..8584ed time=1,792,622,038,500 sealhash=61eee2..4fd7fb "block size"=710  elapsed=14.982ms
+INFO [10-21|22:33:58.950] Successfully seal and write new block    number=17 hash=0cd9cb..dea358 time=1,792,622,038,950 sealhash=842e74..e5c3b8 "block size"=710  elapsed=14.893ms
+
+## note: blocks 11 (control, 1 gwei) and 14 (trigger, 0 gas) both sealed normally;
+## full chain extension evidence: 105 subsequent 'Successfully seal and write new block' lines (see geth.log full copy in this package)

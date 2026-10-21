@@ -1,0 +1,111 @@
+name: Stage 10 F-1 final validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_INCREMENTAL: "0"
+  CARGO_NET_RETRY: "5"
+  RUST_BACKTRACE: "1"
+
+jobs:
+  f1-binary-devnet:
+    name: "F-1 final validation - geth validator vs two reth-bsc followers, long-horizon halt proof"
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - name: Free runner disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL 2>/dev/null || true
+          df -h /
+
+      - name: Checkout audit repo (carries the orchestrator)
+        uses: actions/checkout@v4
+        with:
+          path: audit
+
+      - name: Checkout bnb-chain/bsc at pinned commit
+        uses: actions/checkout@v4
+        with:
+          repository: bnb-chain/bsc
+          ref: 947ba1cb1ef05d4a5f71b738113a3d8b4c16f6b7
+          fetch-depth: 1
+          path: bsc
+
+      - name: Checkout bnb-chain/reth-bsc at pinned commit
+        uses: actions/checkout@v4
+        with:
+          repository: bnb-chain/reth-bsc
+          ref: 1af59ea08e50820c1d31a06bd7ff3e3999541817
+          fetch-depth: 1
+          path: reth-bsc
+
+      - name: Record checked-out commits
+        run: |
+          cd bsc && git rev-parse HEAD && git log -1 --format='%H %ci %s' && cd ..
+          cd reth-bsc && git rev-parse HEAD && git log -1 --format='%H %ci %s' && cd ..
+          rustc -vV || true
+
+      - name: Setup Go and build geth
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: bsc/go.mod
+          cache-dependency-path: bsc/go.sum
+
+      - name: Build geth
+        run: |
+          cd bsc
+          go build -o "$GITHUB_WORKSPACE/geth" ./cmd/geth
+          "$GITHUB_WORKSPACE/geth" version | head -6
+
+      - name: Rust build cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: reth-bsc
+          cache-on-failure: true
+
+      - name: Build reth-bsc release binary
+        run: |
+          cd reth-bsc
+          cargo build --release --locked --bin reth-bsc
+          ./target/release/reth-bsc --version
+
+      - name: Final validation devnet (1 geth validator + 2 reth-bsc followers)
+        run: |
+          python3 audit/stage10/stage10_final_validation.py \
+            --geth "$GITHUB_WORKSPACE/geth" \
+            --reth "$GITHUB_WORKSPACE/reth-bsc/target/release/reth-bsc" \
+            --target 0x0000000000000000000000000000000000001008 \
+            --label final_tokenmanager_1008 \
+            --workdir "$GITHUB_WORKSPACE/run_final"
+
+      - name: Collect summary
+        if: always()
+        run: |
+          set -x
+          if [ -f "$GITHUB_WORKSPACE/run_final/summary.json" ]; then
+            echo "=== run_final/summary.json ==="
+            cat "$GITHUB_WORKSPACE/run_final/summary.json"
+            echo
+          fi
+
+      - name: Upload final validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage10-final-validation-logs
+          path: |
+            run_final/summary.json
+            run_final/genesis.json
+            run_final/geth.log
+            run_final/reth_a.log
+            run_final/reth_b.log
+            run_final/reth_b_pre_restart.log
+            run_final/rejections_A.txt
+            run_final/rejections_B-pre.txt
+            run_final/rejections_B-post.txt
+          if-no-files-found: ignore
+          retention-days: 7
